@@ -392,7 +392,7 @@
 //     }
 //     return maxv
 // };
-
+ 
 //console.log(Math.max(...numArray))
 // console.log(maxinArray(numArray))
 

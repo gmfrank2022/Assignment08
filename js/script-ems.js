@@ -106,7 +106,7 @@ form.addEventListener('submit', (e) => {
     allEmployees.push(tmpEmployee)
 
     // BUILD THE GRID
-    buildGrid()
+    buildGridt()
 
     // RESET THE FORM
     form.reset()
@@ -142,7 +142,7 @@ update.addEventListener('click', (e) => {
     allEmployees.splice(gIndex,1,tmpEmployee)
 
     // BUILD THE GRID
-    buildGrid()
+    buildGridt()
 
     // RESET THE FORM
     form.reset()
@@ -290,6 +290,80 @@ function buildGrid() {
     localStorage.setItem("empData", JSON.stringify(allEmployees));
 };
 
+// BUILD THE EMPLOYEES GRID
+function buildGrid2() {
+    // REMOVE THE EXISTING SET OF ROWS BY REMOVING THE ENTIRE TBODY SECTION
+    empTable.lastElementChild.remove()
+
+    // REBUILD THE TBODY FROM SCRATCH
+    let tbody = document.createElement('tbody');
+
+    // LOOP THROUGH THE ARRAY OF EMPLOYEES
+    // REBUILDING THE ROW STRUCTURE
+    allEmployees.forEach(item => {
+        tbody.innerHTML += 
+        `
+        <tr>
+            <td>${item.employeeID}</td>
+            <td>${item.employeeName}</td>
+            <td>${item.phoneExt}</td>
+            <td>${item.eMail}</td>
+            <td>${item.depSelect}</td>
+            <td><button class='btn btn-danger btn-sm float-end edit'>E</button></td>
+            <td><button class='btn btn-danger btn-sm float-end delete'>X</button></td>
+        </tr>
+        `
+    });
+
+    // BIND THE TBODY TO THE EMPLOYEE TABLE
+    empTable.appendChild(tbody); // Append it to the table
+
+    // UPDATE EMPLOYEE COUNT
+    empCount.value = `(${allEmployees.length})`
+
+    // STORE THE ARRAY IN STORAGE
+    localStorage.setItem("empData", JSON.stringify(allEmployees));
+};
+
+// BUILD THE EMPLOYEES GRID
+function buildGrid3() {
+    // REMOVE THE EXISTING SET OF ROWS BY REMOVING THE ENTIRE TBODY SECTION
+    empTable.lastElementChild.remove()
+
+    // REBUILD THE TBODY FROM SCRATCH
+    let tbody = document.createElement('tbody');
+ 
+    // LOOP THROUGH THE ARRAY OF EMPLOYEES
+    // REBUILDING THE ROW STRUCTURE
+    for( let item of allEmployees ) {
+        tbody.innerHTML += 
+        `
+        <tr>
+            <td>${item.employeeID}</td>
+            <td>${item.employeeName}</td>
+            <td>${item.phoneExt}</td>
+            <td>${item.eMail}</td>
+            <td>${item.depSelect}</td>
+            <td><button class='btn btn-danger btn-sm float-end edit'>E</button></td>
+            <td><button class='btn btn-danger btn-sm float-end delete'>X</button></td>
+        </tr>
+        `
+    };
+ 
+    // BIND THE TBODY TO THE EMPLOYEE TABLE
+    empTable.appendChild(tbody); // Append it to the table
+
+    // UPDATE EMPLOYEE COUNT
+    empCount.value = `(${allEmployees.length})`
+
+    // STORE THE ARRAY IN STORAGE
+    localStorage.setItem("empData", JSON.stringify(allEmployees));
+};
+
 allEmployees = loadEmployeeTable()
 
-buildGrid()
+buildGridt()
+
+function buildGridt() {
+    buildGrid3()
+}
